@@ -1,6 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&family=Rubik:wght@300&display=swap');
+
 /******* Change Box Model ***************/
+* {
+  margin: 0;
+}
+
 *,
 *:before,
 *:after {
   box-sizing: border-box;
+}
+
+body{
+  background: url('../images/site/checkerboard.jpg') center repeat;
+  background-size: 500px 375px;
+  font-family: "Rubik";
+}
+
+.flex {
+  display: flex;
+}
+
+
+#top-header {
+  justify-content: space-between;
+  padding: 10px;
+}
+
+#top-header a {
+  text-decoration: none;
+  color: #000;
+  font-family: "Poppins";
+}
+
+.siteName a {
+  font-size: 1.2em;
+  font-weight: 900;
+}
+
+nav {
+  background: #242333;
+  color: #fff;
+  font-family: "Rubik";
+  margin-bottom: 20px;
+}
+
+nav ul {
+  justify-content: space-evenly;
+  list-style: none;
+  padding: 10px;
+}
+
+nav ul li:hover {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+
+#wrapper {
+  background-color: #fff;
+  max-width: 800px;
+  margin: auto;
+
+}
+
+h2, h3{
+  font-family: "Poppins";
+}
+
+.hero {
+  margin-bottom: 40px;
+  position: relative;
+  width: 90%;
+}
+
+.hero img {
+  display: block;
+  width: 90%;
+  max-width: 500px;
+  margin: auto;
+}
+
+.action {
+  width: fit-content;
+  background: rgba(255, 255, 255, 0.9);
+  color: #01b0d3;
+  position: absolute;
+  top: 50px;
+  padding: 5px;
+}
+
+.button {
+  color: #000;
+  background: #01b0d3;
+  width: 100px;
+  padding: 10px;
+  box-shadow: 2px 2px #999;
+}
+
+ul.no-bullets {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.reviews ul {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+}
+
+.reviews ul li {
+  padding: 3px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  row-gap: 20px;
+  text-align: center;
+  padding: 0px;
+  margin-bottom: 40px;
+}
+
+.card div{
+  display: flex;
+  width: 100%;
+  height: 75px;
+  padding: 10px;
+  background-color: #01b0d3;
+  justify-content: center;
+  border: 2px solid #242333;
+}
+
+footer {
+  margin: 10px auto;
+}
+
+@media only screen and (min-width: 700px) {
+  #wrapper {
+    margin: 20px auto;
+    border: 5px solid #01b0d3;
+    border-radius: 10px;
+  }
+
+  .action {
+    left: 80px;
+    padding: 20px;
+  }
+
+  .desktop-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 20px;
+    margin: 10px;
+  }
+
+  .upgrades {
+    grid-column-start: 1;
+  }
+
+  .reviews {
+    grid-column-start: 2;
+    grid-row-start: 1;
+  }
+
 }
