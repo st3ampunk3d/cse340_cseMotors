@@ -6,7 +6,7 @@ const Util = {}
  ************************** */
 Util.getNav = async function (req, res, next) {
   let data = await invModel.getClassifications()
-  let list = "<ul>"
+  let list = '<ul class="flex">'
   list += '<li><a href="/" title="Home page">Home</a></li>'
   data.rows.forEach((row) => {
     list += "<li>"
@@ -30,14 +30,14 @@ Util.getNav = async function (req, res, next) {
 Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
-    grid = '<ul id="inv-display">'
+    grid = '<ul id="inv-display" class="no-bullets desktop-grid">'
     data.forEach(vehicle => { 
-      grid += '<li>'
-      grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
+      grid += '<li class="card">'
+      grid +=  '<div class="card-img"><a href="../../inv/detail/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
       + 'details"><img src="' + vehicle.inv_thumbnail 
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a>'
+      +' on CSE Motors" /></a></div>'
       grid += '<div class="namePrice">'
       grid += '<hr />'
       grid += '<h2>'
@@ -57,4 +57,35 @@ Util.buildClassificationGrid = async function(data){
   return grid
 }
 
-module.exports = Util
+/* **************************************
+* Build the classification view HTML
+* ************************************ */
+Util.buildDetailsGrid = async function(data){
+  let grid
+  if(data.length > 0){
+    grid = '<div class="desktop-grid">'
+    data.forEach(vehicle => { 
+      grid += `<div class="left">
+                 <img class="full" src="${vehicle.inv_image}"
+                  alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors" />
+               </div>`
+      grid += `<div class="right">
+                 <h2>${vehicle.inv_make} ${vehicle.inv_model} Details</h2>
+                 <ul class="no-bullets">
+                   <li class="highlight"><span>Price: </span>$${vehicle.inv_price}</li>
+                   <li><span>Description: </span>${vehicle.inv_description}</li>
+                   <li class="highlight"><span>Color: </span>${vehicle.inv_color}</li>
+                   <li><span>Miles: </span>${vehicle.inv_miles}</li>
+                 </ul>
+               </div>`
+    })
+    grid += '</div>'
+  } else { 
+    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+  return grid
+}
+
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
+module.exports = {Util}
