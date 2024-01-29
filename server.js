@@ -13,6 +13,34 @@ const app = express()
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
 const utilities = require("./utilities")
+const session = require("express-session")
+const pool = require('./database/')
+const account = require("./routes/accountRoute")
+const bodyParser = require("body-parser")
+
+/* ***********************
+ * Middleware
+ * ************************/
+
+app.use(session({
+  store: new (require('connect-pg-simple')(session))({
+    createTableIfMissing: true,
+    pool,
+  }),
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  name: 'sessionId',
+}))
+
+app.use(require('connect-flash')())
+app.use((req,res,next)=>{
+  res.locals.messages = require('express-messages')(req,res)
+  next()
+})
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 /* ***********************
  * View Engine Templates
@@ -32,6 +60,9 @@ app.get("/error", utilities.Util.handleErrors(baseController.error))
 
 // Inventory routes
 app.use("/inv", utilities.Util.handleErrors(inventoryRoute))
+
+// Account routes
+app.use("/account", utilities.Util.handleErrors(account))
 
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {

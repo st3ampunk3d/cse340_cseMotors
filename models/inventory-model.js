@@ -32,7 +32,7 @@ async function getVehicleById(vehicle_id) {
        WHERE inv_id = $1`,
        [vehicle_id]
     )
-    console.log(data.rows)
+    //console.log(data.rows)
     return data.rows
 
   } catch (error) {
