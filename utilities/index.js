@@ -24,37 +24,48 @@ Util.getNav = async function (req, res, next) {
   return list
 }
 
+Util.getCats = async (req,res,next) => {
+  let data = await invModel.getClassifications()
+  let list =
+  `<select name="classification_id" id="classificationId">
+    <option value="none" disabled hidden>Select an Option</option>`
+
+  data.rows.forEach((row) => {
+    list += `<option value="${row.classification_id}">${row.classification_name}</option>`
+  })
+  list += `</select>`
+  return list
+}
+
 /* **************************************
 * Build the classification view HTML
 * ************************************ */
 Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
-    grid = '<ul id="inv-display" class="no-bullets desktop-grid">'
-    data.forEach(vehicle => { 
-      grid += '<li class="card">'
-      grid +=  '<div class="card-img"><a href="../../inv/detail/'+ vehicle.inv_id 
-      + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail 
-      +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a></div>'
-      grid += '<div class="namePrice">'
-      grid += '<hr />'
-      grid += '<h2>'
-      grid += '<a href="../../inv/detail/' + vehicle.inv_id +'" title="View ' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + ' details">' 
-      + vehicle.inv_make + ' ' + vehicle.inv_model + '</a>'
-      grid += '</h2>'
-      grid += '<span>$' 
-      + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
-      grid += '</div>'
-      grid += '</li>'
+    grid = `<div class="desktop-grid">`
+    data.forEach(vehicle => {
+      grid += `
+      <div class="media-card">
+        <a href=" ../../inv/detail/${vehicle.inv_id}" title="View ${vehicle.inv_make} ${vehicle.inv_model} details">
+          <img src="${vehicle.inv_thumbnail}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model} on CSE Motors">
+          <div class="namePrice">
+            <h2>${vehicle.inv_make} ${vehicle.inv_model}</h2>
+            <span class="price">$${new Intl.NumberFormat('en-us').format(vehicle.inv_price)}</span>
+          </div>
+        </a>
+      </div>`
     })
-    grid += '</ul>'
+    grid += `</div>`
   } else { 
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
   return grid
+}
+
+Util.buildManagementTools = async () =>{
+  let actions
+  actions += `<button type=">`
 }
 
 /* **************************************

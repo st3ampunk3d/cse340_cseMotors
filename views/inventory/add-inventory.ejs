@@ -1,0 +1,49 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <%- messages() %>
+    <% if (errors) { %>
+      <ul class="notice">
+     <% errors.array().forEach(error => { %>
+       <li><%= error.msg %></li>
+    <%  }) %>
+     </ul>
+    <% } %>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+    <div class="container">
+        <form id="addInventoryForm" action="/inv/add-inventory" method="post">
+            <h2>Register New Classification</h2>
+            <label for="inv_make"><b>Make:</b></label>
+            <input type="text"  name="inv_make" id="invMake" required value="<%= locals.inv_make %>" pattern="[A-Za-z0-9]">
+
+            <label for="inv_model"><b>Model:</b></label>
+            <input type="text"  name="inv_model" id="invModel" required value="<%= locals.inv_model %>" pattern="[A-Za-z0-9 -.]">
+
+            <label for="inv_year"><b>Year:</b></label>
+            <input type="number"  name="inv_year" id="invYear" required value="<%= locals.inv_year %>" pattern="{4}" placeholder="2024">
+
+            <label for="inv_description"><b>Description:</b></label>
+            <input type="text"  name="inv_description" id="invDescription" required value="<%= locals.inv_description %>" pattern="[A-Zaz0-9 .,!$?]">
+
+            <label for="inv_image"><b>Primarey Image:</b></label>
+            <input type="text"  name="inv_image" id="invImage" required value="no-image.png" readonly>
+
+            <label for="inv_thumbnail"><b>Thumbnail Image:</b></label>
+            <input type="text"  name="inv_thumbnail" id="invThumbnail" required value="no-image-tn.png" readonly>
+
+            <label for="inv_price"><b>Asking Price:</b></label>
+            <input type="number"  name="inv_price" id="invPrice" required value="<%= locals.inv_price %>" step="100">
+
+            <label for="inv_miles"><b>Miles:</b></label>
+            <input type="number"  name="inv_miles" id="invMiles" required value="<%= locals.inv_miles %>">
+
+            <label for="inv_color"><b>Color:</b></label>
+            <input type="text"  name="inv_color" id="invColor" required value="<%= locals.inv_color %>">
+
+            <%- categories %>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
