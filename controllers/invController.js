@@ -71,7 +71,7 @@ async function addInventory(req, res) {
   const {inv_make, inv_model, inv_year, inv_description, inv_image, inv_thumbnail, inv_price, inv_miles, inv_color, classification_id} = req.body
 
   const fullImagePath = `/images/vehicles/${inv_image}`
-  const fullThumbPath = `/Images/vehicles/${inv_thumbnail}`
+  const fullThumbPath = `/images/vehicles/${inv_thumbnail}`
 
   const result = await invModel.addInventory(
     inv_make,
@@ -202,7 +202,7 @@ invCont.updateInventory = async function (req, res, next) {
   } = req.body
 
   const fullImagePath = `/images/vehicles/${inv_image}`
-  const fullThumbPath = `/Images/vehicles/${inv_thumbnail}`
+  const fullThumbPath = `/images/vehicles/${inv_thumbnail}`
 
   const updateResult = await invModel.updateInventory(
     inv_id,  
