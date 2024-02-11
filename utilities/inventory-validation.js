@@ -95,7 +95,7 @@ validate.checkUpdateData = async (req,res,next) => {
     if (!errors.isEmpty()) {
         let nav = await utilities.Util.getNav()
         let categories = await utilities.Util.getCats()
-        res.render("inventory/add-inventory", {
+        res.render("inventory/edit-inventory", {
             title: `Editing: ${inv_make} ${inv_model}`,
             errors,
             nav,
@@ -142,12 +142,12 @@ validate.vehicleRules = () => {
 
         body("inv_image")
             .trim()
-            .isIn(["no-image.png"])
+            .matches(/(^.*\.(jpg|JPG|png|PNG)$)/)
             .withMessage("Custom Image uploading is not an option yet. Please use the no-image.png file for now."),
 
         body("inv_thumbnail")
             .trim()
-            .isIn(["no-image-tn.png"])
+            .matches(/(^.*\.(jpg|JPG|png|PNG)$)/)
             .withMessage("Custom Image uploading is not an option yet. Please use the no-image-tn.png file for now."),
 
 
