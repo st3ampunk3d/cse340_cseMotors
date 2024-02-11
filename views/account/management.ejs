@@ -1,0 +1,24 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <%- messages() %>
+    <% if (errors) { %>
+      <ul class="notice">
+     <% errors.array().forEach(error => { %>
+       <li><%= error.msg %></li>
+    <%  }) %>
+     </ul>
+    <% } %>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+    <h2>Welcome <%- locals.accountData.account_firstname %></h2>
+    <p>You are logged in</p>
+
+
+    <div class="container">
+      <button type="button"><a href="/account/update/">Account Settings</a></button>
+      <% if (locals.accountData.account_type != "Client"){%>
+        <button type="button"><a href="/inv/">Manage Inventory</a></button>
+      <% } %>
+    </div>

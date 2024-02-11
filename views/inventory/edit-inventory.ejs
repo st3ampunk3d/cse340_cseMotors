@@ -13,8 +13,8 @@
     } %>
 
     <div class="container">
-        <form id="addInventoryForm" action="/inv/add-inventory" method="post">
-            <h2>Add new Vehicle to Inventory</h2>
+        <form id="editInventoryForm" action="/inv/update" method="post">
+            <h2>Edit Vehichle</h2>
             <label for="inv_make"><b>Make:</b></label>
             <input type="text"  name="inv_make" id="invMake" required value="<%= locals.inv_make %>" pattern="[A-Za-z]{2,}">
 
@@ -44,6 +44,10 @@
 
             <%- categories %>
             
-            <button type="submit">Submit</button>
+            <button type="submit">Update</button>
+
+            <input type="hidden" name="inv_id"
+            <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+            <% } %>>
         </form>
     </div>

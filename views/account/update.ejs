@@ -1,0 +1,57 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <%- messages() %>
+    <% if (errors) { %>
+      <ul class="notice">
+     <% errors.array().forEach(error => { %>
+       <li><%= error.msg %></li>
+    <%  }) %>
+     </ul>
+    <% } %>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+    <div class="container">
+      <form action="/account/update" method="post">
+            <h2>Update Account Info</h2>
+  
+            <label for="account_firstname"><b>First name:</b></label>
+            <input type="text" name="account_firstname" id="accountFirstname" required value="<%= locals.account_firstname %>">
+
+            <label for="account_lastname"><b>Last name:</b></label>
+            <input type="text" name="account_lastname" id="accountLastname" required value="<%= locals.account_lastname %>">
+
+            <label for="account_email"><b>Email address:</b></label>
+            <input type="text"  name="account_email" id="accountEmail" required value="<%= locals.account_email %>">
+
+            <button type="submit">Update</button>
+
+            <input type="hidden" name="account_id"
+            <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+            <% } %>>
+
+            <p class="register"><a href="/account/">Cancel</a></p>
+
+        </form>
+        
+        <form action="/account/change-password" method="post">
+            <h2>Change Your Password</h2>
+            
+            <label for="currentPassword">Current Password:</label> 
+            <input type="password" name="current_password" id="currentPassword" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+
+            <label for="newPassword">New Password:</label> 
+            <input type="password" name="new_password" id="newPassword" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$">
+            <span>Note: Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span></br> 
+        
+            <button type="submit">Change Password</button>
+
+            <input type="hidden" name="account_id"
+            <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+            <% } %>>
+
+            <p class="register"><a href="/account/">Cancel</a></p>
+            
+        </form>
+      </div>

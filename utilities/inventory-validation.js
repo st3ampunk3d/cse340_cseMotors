@@ -75,6 +75,48 @@ validate.checkVehicle = async (req,res,next) => {
     next()
 }
 
+validate.checkUpdateData = async (req,res,next) => {
+    const {
+        inv_id,
+        inv_make,
+        inv_model,
+        inv_year,
+        inv_description,
+        inv_image,
+        inv_thumbnail,
+        inv_price,
+        inv_miles,
+        inv_color,
+        classification_id
+    } = req.body
+
+    let errors = []
+    errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        let nav = await utilities.Util.getNav()
+        let categories = await utilities.Util.getCats()
+        res.render("inventory/add-inventory", {
+            title: `Editing: ${inv_make} ${inv_model}`,
+            errors,
+            nav,
+            categories,
+            inv_id,
+            inv_make,
+            inv_model,
+            inv_year,
+            inv_description,
+            inv_image,
+            inv_thumbnail,
+            inv_price,
+            inv_miles,
+            inv_color,
+            classification_id,
+        })
+        return
+    }
+    next()
+}
+
 validate.vehicleRules = () => {
     return [
         body("inv_make")
@@ -135,5 +177,6 @@ validate.vehicleRules = () => {
         })
     ]
 }
+
 
 module.exports = validate

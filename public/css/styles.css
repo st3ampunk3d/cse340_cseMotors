@@ -179,6 +179,7 @@ form {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
+  margin: 10px;
 }
 
 h2 {
@@ -222,6 +223,51 @@ button[type="submit"]:hover, button[type="button"]:hover {
 button a {
   text-decoration: none;
   color: #fff;
+}
+
+.inventory-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.inventory-table th {
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+
+
+.inventory-table td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+
+.inventory-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.inventory-table .btn {
+  padding: 5px 10px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.inventory-table .btn-modify {
+  background-color: #4CAF50;
+}
+
+.inventory-table .btn-delete {
+  background-color: #f44336;
+}
+
+.notice {
+  color: #f44336;
 }
 
 @media only screen and (min-width: 700px) {
