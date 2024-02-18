@@ -1,4 +1,4 @@
-const pool = require('../database/')
+const pool = require("../database/")
 
 /* *****************************
 *   Register new account
@@ -74,11 +74,39 @@ async function getAccountById (account_id) {
     return new Error("Account could not be found")
   }
 }
+
+async function getIdByName (name) {
+    let [account_firstname, account_lastname] = name.split(" ")
+  try {
+    const result = await pool.query(
+      'SELECT account_id FROM account WHERE account_firstname=$1 AND account_lastname=$2',
+      [account_firstname, account_lastname])
+    return result.rows[0].account_id
+  } catch (error) {
+    return new Error("Account could not be found")
+  }
+}
+
+async function getNameById (account_id) {
+    console.log(account_id)
+    const result = await pool.query(
+      'SELECT * FROM account WHERE account_id=$1',
+      [account_id])
+    return `${result.rows[0].account_firstname} ${result.rows[0].account_lastname}`
+}
+
+async function getAllUsers (account_id) {
+  return await pool.query(`SELECT account_id, account_email FROM account WHERE account_id!=$1`, [account_id])
+}
+
 module.exports = {
   registerAccount,
   checkExistingEmail,
   getAccountByEmail,
   getAccountById,
+  getNameById,
   updateAccount,
-  changePassword
+  changePassword,
+  getIdByName,
+  getAllUsers
 }

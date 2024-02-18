@@ -1,0 +1,25 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <%- messages() %>
+    <% if (errors) { %>
+      <ul class="notice">
+     <% errors.array().forEach(error => { %>
+       <li><%= error.msg %></li>
+    <%  }) %>
+     </ul>
+    <% } %>
+    <% }  %>
+
+    <div class="email-container">
+      <div class="email-header">
+        <p>From: <%- message_from %></p>
+        <p>Date: <%- message_created %></p>
+      </div>
+      <div class="email-body">
+        <%- message_body %>
+      </div>
+      <div class="email-actions">
+        <button class="option-btn delete-btn"><a href="/messages/archived/${message.message_id}">Archive</a></button>
+        <button class="option-btn reply-btn"><a href="/messages/reply/${message.message_id}">Reply</a></button>
+      </div>
+    </div>

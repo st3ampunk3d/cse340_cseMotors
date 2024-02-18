@@ -1,5 +1,6 @@
 const utilities = require("../utilities/")
 const accountModel = require("../models/account-model")
+const msgModel = require("../models/message-model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -44,11 +45,13 @@ async function accountLogin(req, res) {
   let nav = await utilities.Util.getNav()
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
+  const inInbox = await msgModel.getInboxMessages(accountData.account_id).length
   if (!accountData) {
    req.flash("notice", "Please check your credentials and try again.")
    res.status(400).render("account/login", {
     title: "Login",
     nav,
+    
     errors: null,
     account_email,
    })
@@ -59,7 +62,6 @@ async function accountLogin(req, res) {
    delete accountData.account_password
    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
    res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
-   console.log(accountData.account_firstname)
    return res.redirect("/account/")
    }
   } catch (error) {
@@ -131,7 +133,6 @@ async function buildUpdate(req, res, next) {
  * ************************** */
 async function updateAccount(req, res, next) {
   let nav = await utilities.Util.getNav()
-  console.log(req.body)
   const {
     account_id,
     account_firstname,
@@ -139,7 +140,6 @@ async function updateAccount(req, res, next) {
     account_email
   } = req.body
 
-  console.log(account_id)
 
   const updateResult = await accountModel.updateAccount(
     account_id,

@@ -1,4 +1,6 @@
 const invModel = require("../models/inventory-model")
+const msgModel = require("../models/message-model")
+const accntModel = require("../models/account-model")
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
 const Util = {}
@@ -34,6 +36,19 @@ Util.getCats = async (req,res,next) => {
 
   data.rows.forEach((row) => {
     list += `<option value="${row.classification_id}">${row.classification_name}</option>`
+  })
+  list += `</select>`
+  return list
+}
+
+Util.getUsers = async (account_id, req,res,next) => {
+  let data = await accntModel.getAllUsers(account_id)
+  let list = 
+  `<select name="message_to" id="messageTo">
+    <option value="default">Send to...</option>`
+
+  data.rows.forEach((row) => {
+    list += `<option value="${row.account_id}">${row.account_email}</option>`
   })
   list += `</select>`
   return list

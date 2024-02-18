@@ -1,0 +1,29 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <%- messages() %>
+    <% if (errors) { %>
+      <ul class="notice">
+     <% errors.array().forEach(error => { %>
+       <li><%= error.msg %></li>
+    <%  }) %>
+     </ul>
+    <% } %>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+    <h2>Create New Message</h2>
+    <form action="/messages/send" method="post">
+      <%- users %>
+
+        <label for="message_from">From:</label>
+        <input type="text" id="messageFrom" name="message_from" value="<%= locals.accountData.account_email %>" required readonly><br><br>
+
+        <label for="message_subject">Subject:</label>
+        <input type="text" id="messageSubject" name="message_subject" required><br><br>
+
+        <label for="message_body">Body:</label><br>
+        <textarea id="messageBody" name="message_body" rows="5" cols="50" required></textarea><br><br>
+
+        <button type="submit">Submit</button>
+    </form>

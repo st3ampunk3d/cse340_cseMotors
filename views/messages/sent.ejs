@@ -1,0 +1,27 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <%- messages() %>
+    <% if (errors) { %>
+      <ul class="notice">
+     <% errors.array().forEach(error => { %>
+       <li><%= error.msg %></li>
+    <%  }) %>
+     </ul>
+    <% } %>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+    <table id="messageTable" class="message-table">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>To</th>
+                <th>Subject</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            <%- messageList %>
+        </tbody>
+    </table>

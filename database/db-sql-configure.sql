@@ -46,16 +46,6 @@ CREATE TABLE IF NOT EXISTS public.account(
     CONSTRAINT account_pk PRIMARY KEY (account_id)
 );
 
--- Data for table `classification`
-INSERT INTO public.classification(classification_name)
-VALUES ('Custom'),
-    ('Sport'),
-    ('SUV'),
-    ('Truck'),
-    ('Sedan');
-
-    
-
 -- Fix the image URL references in the `inventory` table
 UPDATE public.inventory
     SET inv_image = REPLACE(inv_image, '/images', '/images/vehicles'),

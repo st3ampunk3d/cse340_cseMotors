@@ -1,0 +1,38 @@
+<% if (title) { %>
+  <h1><%= title %></h1>
+  <%- messages() %>
+  <% if (errors) { %>
+    <ul class="notice">
+   <% errors.array().forEach(error => { %>
+     <li><%= error.msg %></li>
+  <%  }) %>
+   </ul>
+  <% } %>
+  <% }  %>
+
+  <div class="email-container">
+    <div class="email-header">
+      <p>From: <%- message_from %></p>
+      <p>Date: <%- message_created %></p>
+    </div>
+    <div class="email-body">
+      <%- original_body %>
+    </div>
+    <form class="compose" action="/messages/replied" method="post">
+
+        <label for="message_body">Reply:</label><br>
+        <textarea id="messageBody" name="message_body" rows="5" cols="50"
+          <% if(locals.message_body) { %> value = <%= locals.message_body %>"
+          <% } %> required></textarea><br><br>
+
+        <!---MAKE HIDDEN FIELDS TO SEND THE REST OF THE FORM DATA IN THE RESPONSE BODY. THIS WILL SAVE YOU!!-->
+
+        <button type="submit">Submit</button>
+
+        <input type="hidden" name="message_subject" value="<%= title %>" required>
+        <input type="hidden" name="message_to" value="<%- message_from %>" required>
+        <input type="hidden" name="message_created" value="<%- message_created %>" required>
+        <input type="hidden" name="original_body" value="<%- original_body %>" required>
+
+    </form>
+  </div>

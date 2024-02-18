@@ -89,7 +89,7 @@ async function addInventory(req, res) {
 
   if (result) {
     let nav = await utilities.Util.getNav()
-    let e = await utilities.Util.getCats()
+    let categories = await utilities.Util.getCats()
     req.flash(
       "notice",
       `Inventory updated successfully.`

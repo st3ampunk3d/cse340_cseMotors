@@ -270,6 +270,131 @@ button a {
   color: #f44336;
 }
 
+/* Table styles */
+.message-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.message-table th, .message-table td {
+  padding: 8px;
+  text-align: left;
+}
+
+.message-table th {
+  background-color: #f0f0f0;
+}
+
+.message-table th {
+  background-color: #f2f2f2;
+}
+
+.message-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.message-table tr:hover {
+  background-color: #01b0d3;
+}
+
+.message-table tr td a {
+  text-decoration: none;
+  color: black
+}
+
+.unread {
+  font-weight: bold;
+  color: #000;
+}
+
+.read {
+  color: #888;
+}
+
+.message-table button a{
+  color: #fff !important;
+}
+
+.option-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007bff; /* Change to your preferred color */
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.option-btn:hover {
+  background-color: #0056b3; /* Change to your preferred color */
+}
+
+.delete-btn {
+  background-color: #dc3545; /* Change to your preferred color */
+}
+
+.reply-btn {
+  background-color: #28a745; /* Change to your preferred color */
+}
+
+.read-btn {
+  background-color: #6c757d; /* Change to your preferred color */
+}
+
+.read-btn:disabled {
+  background-color: #ddd; /* Change to your preferred color */
+  cursor: not-allowed;
+}
+
+.read {
+  color: #888;
+}
+
+.unread {
+  font-weight: bold;
+  background-color: #ddd;
+  color: #000
+}
+
+.email-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+.email-header {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+.email-header p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+.email-body {
+  padding: 20px 0;
+}
+.email-body p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+.compose form {
+  margin-top: 20px;
+}
+label {
+  font-weight: bold;
+}
+#messageBody textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
 @media only screen and (min-width: 700px) {
   #wrapper {
     margin: 20px auto;
